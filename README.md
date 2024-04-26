@@ -5,11 +5,11 @@ This repository is dedicated to the study and evaluation of pretrained model (So
 
 ## Repository Contents
 
-- **Model Metadata (`model_meta_data.csv`)**: Contains metadata for each model, detailing aspects such as architecture, input size, model capacity, complexity, pre-trained datasets, and performance metrics.
-- **Dataset Metadata (`dataset_meta_data.csv`)**: Includes metadata for various datasets, describing features like the number of classes, categories, sample size, and domain/modality specifics.
+- **Model Metadata (`source_model_meta_data.csv`)**: Contains metadata for each model, detailing aspects such as architecture, input size, model capacity, complexity, pre-trained datasets, and performance metrics.
+- **Dataset Metadata (`target_dataset_meta_data.csv`)**: Includes metadata for various datasets, describing features like the number of classes, categories, sample size, and domain/modality specifics.
 - **Training Records (`record_domainnet_10_270.csv`)**: Historical records of training sessions, stored in CSV format, providing insights into the training dynamics and outcomes.
 - **Transferability Scores (`LogME.csv`)**: A matrix of transferability scores across multiple models and tasks, facilitating comparative studies and benchmarking.
-- **Partially visualization (`transferability_matrix.jpg`)**: A graphical representation of the transferability relationships between different models and tasks.
+- **Partially visualization (`./images/transferability_matrix.jpg`)**: A graphical representation of the transferability relationships between different models and tasks.
 
 ## Model Metadata
 
@@ -63,6 +63,7 @@ In the context of pre-trained model selection, the primary criterion focuses on 
 ![Transfer Formula](images/function.svg)
 
 This equation represents the expected accuracy of the model \(M\), when its pretrained feature extractor \(\theta\) is combined with a newly trained decoder \(h_t\) on the target dataset \(D_T\).
+
 
 ### Partial Visualization of Transferability Matrix
 
