@@ -57,11 +57,10 @@ Below is a table describing some of the datasets included in this repository:
 | 270_clipart_32 | 50                     | clipart  | 32         | spoon, flying_saucer, ..., paint_can | 1494       |
 
 ## Training Records
+
 In the context of pre-trained model selection, the primary criterion focuses on evaluating the transferability of a source model to a target task. Consider the source task \(M_S = \{(m_i, )\}_{i=1}^m\), target task \(D_T = \{(x_T^i, y_T^i)\}_{i=1}^n\), and the model \(M = (\theta, h_s)\) trained on the source task \(D_S\), where \(\theta\) represents the feature extraction layer for input \(x_s\), and \(h_s\) denotes the decoder layer that maps the extracted features to the label \(y_s\). This approach employs the widely used transfer learning strategy known as "Retrain head", which retains the parameters of the source task's feature extraction layer \(\theta\) while finetuning to optimize the parameters of the target task's decoder readout function \(h_t\). Empirical transferability is defined by the average accuracy of the source model when applied to the target task.
 
-$$
-\operatorname{Trf}(M \rightarrow D_T) = E_{D_T}\left[\operatorname{acc}\left(y_T, x_T ; \theta, h_t\right)\right]
-$$
+![Transfer Formula](images/function.svg)
 
 This equation represents the expected accuracy of the model \(M\), when its pretrained feature extractor \(\theta\) is combined with a newly trained decoder \(h_t\) on the target dataset \(D_T\).
 
@@ -69,7 +68,7 @@ This equation represents the expected accuracy of the model \(M\), when its pret
 
 Below is a graphical representation of the transferability relationships between different models and tasks:
 
-![Transferability Matrix](./partially_matrix.jpg)
+![Transferability Matrix](./images/partially_matrix.jpg)
 
 
 ## Embedding
