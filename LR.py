@@ -1,5 +1,72 @@
 import torch
+import numpy as np
+from scipy.stats import spearmanr
+import numpy as np
+import torch
 import torch.nn as nn
+
+source_embedding = np.load("./Embedding/Model_embedding.npy")
+target_embedding = torch.tensor(np.load("./Embedding/Dataset_embedding.npy")).float()
+task_embedding = torch.tensor(np.concatenate((source_embedding, target_embedding))).float()
+t_affinity_matrix_tensor = pd.read_csv("./record_domainnet_10_270.csv",index_col=0)
+t_affinity_matrix = t_affinity_matrix_tensor.values
+
+m = 10
+s = 3
+d = 6
+t = 15
+
+edge_weight = np.arange(m*s*d*t).reshape([m, s, d, t])
+
+cross_domain_index = {}
+for i in range(d):
+    test_index = edge_weight[:, :, i:i+1, :].flatten()
+    train_index = np.concatenate([edge_weight[:, :, 0:i, :], edge_weight[:, :, i+1:d, :]], axis=2).flatten()
+    print(i, len(test_index), len(train_index))
+    cross_domain_index[f"cross{i}"] = {
+        "train_index": train_index,
+        "test_index": test_index
+    }
+
+def split_data(node_embedding, edge_index, edge_weight, mask_ratio=0.5):
+    # # 随机打乱边的索引
+    # num_edges = edge_index.shape[1]
+    # permuted_indices = torch.randperm(num_edges)
+
+    # # 划分训练集和测试集的边索引
+    # num_train_edges = int(num_edges * (1 - mask_ratio))
+    # train_edge_indices = permuted_indices[:num_train_edges]
+    # test_edge_indices = permuted_indices[num_train_edges:]
+
+    train_edge_indices = cross_domain_index["cross1"]["train_index"]
+    test_edge_indices = cross_domain_index["cross1"]["test_index"]
+
+    # 划分边索引
+    train_edge_index = edge_index[:, train_edge_indices]
+    test_edge_index = edge_index[:, test_edge_indices]
+
+    # 获取训练和测试边的权重
+    train_edge_weight = edge_weight.reshape(-1)[train_edge_indices]
+    test_edge_weight = edge_weight.reshape(-1)[test_edge_indices]
+
+    # 创建训练集和测试集的Data对象
+    train_data = Data(x=node_embedding, edge_index=train_edge_index, edge_attr=train_edge_weight)
+    test_data = Data(x=node_embedding, edge_index=test_edge_index, edge_attr=train_edge_weight)
+
+    train_label = edge_weight
+
+    return train_data, train_label, test_data, train_edge_indices, test_edge_indices
+
+edge_index = []
+for i in range(t_affinity_matrix.shape[0]):
+    for j in range(t_affinity_matrix.shape[0],t_affinity_matrix.shape[0] + t_affinity_matrix.shape[1]):
+        edge_index.append([i, j])
+
+edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous()
+
+train_data, train_label, test_data, train_edge_indices, test_edge_indices = split_data(task_embedding, edge_index, torch.Tensor(t_affinity_matrix))
+test_ground_truth = torch.Tensor(t_affinity_matrix).to(device)
+test_mask_indices_matrix = [(y, x) for x, y in zip(test_data.edge_index[1] % 270, test_data.edge_index[0])]
 
 class LinearRegression(nn.Module):
     def __init__(self, input_dim):
@@ -40,7 +107,7 @@ criterion = nn.MSELoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
 # 训练模型
-num_epochs = 1000
+num_epochs = 5000
 for epoch in range(num_epochs):
     # 前向传播
     outputs = model(X_train_tensor)

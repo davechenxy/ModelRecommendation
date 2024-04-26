@@ -102,6 +102,9 @@ Incorporates model scoring metrics like LogME, LEEP, and H-Score as edge feature
 ## Baseline Method
 
 - **Linear Regression** LR.py
+Linear Regression - Average Test Spearman Correlation: 0.9320
+
+
 
 For any queries or further information, please contact davechenhello@gmail.com
 
