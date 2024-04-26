@@ -1,0 +1,11 @@
+Architecure_family,model name,# of parameters,acc@1 (on ImageNet-1K),GFLOPS
+convnext,convnext_small,50223688,83.616,8.68
+convnext,convnext_tiny,28589128,82.52,4.46
+densenet,densenet121,7978856,74.434,2.83
+efficientnet,efficientnet_b0,5288548,77.692,0.39
+efficientnet,efficientnet_b3,12233232,82.008,1.83
+mobilenet,mobilenet_v2,3504872,72.154,0.3
+resnet,resnet101,68883240,78.468,11.4
+resnet,resnet50,25557032,80.858,4.09
+resnet,resnet18,11689512,69.758,1.81
+resnet,wide_resnet50_2,44549160,81.886,7.8
