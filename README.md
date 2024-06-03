@@ -92,20 +92,13 @@ Use target data through embedding.ipynb to generate the Model_embedding.npy file
 ### Target Embedding
 Use source data through embedding.ipynb to generate the Dataset_embedding.npy file.
 
-### Foundation Model Embedding
-We utilize foundation model embeddings (e.g., BERT, GPT-2, or CLIP Text Encoder, here provied BERT) to capture the **domain** and **label** textual characteristics of datasets, enhancing the predictive accuracy of our transferability models. FM_embedding.npy
+##  MS Score
 
-## Additional MS Score
+Incorporates model scoring metrics like LogME, LEEP, and H-Score as indicators of model transferability.
 
-Incorporates model scoring metrics like LogME, LEEP, and H-Score as edge features in our graphs, serving as indicators of model transferability.
-
-## Baseline Method
-
-- **Linear Regression** LR.py
-Linear Regression - Average Test Spearman Correlation: 0.9320
-
-
-
-For any queries or further information, please contact davechenhello@gmail.com
-
+## Our Method
+- **Graph Attention Network**
+- gat_dm.py
+- **Linear Regression**
+- LR.py
 
