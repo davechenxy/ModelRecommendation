@@ -2,6 +2,7 @@
 
 ## Overview
 This repository is dedicated to the study and evaluation of pretrained model (Source model) transferability across a diverse set of tasks (Target datasets). We use metadata of models and datasets, along with training history records, to predict the transferability of models on various datasets. This resource aims to facilitate research into optimizing pre-trained models for specific tasks by accurately predicting and evaluating their transferability.
+![Prediction result sorted by missing edges](./images/result.jpg)
 
 ## Repository Contents
 
