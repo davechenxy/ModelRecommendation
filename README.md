@@ -100,6 +100,6 @@ Incorporates model scoring metrics like LogME, LEEP, and H-Score as indicators o
 
 ## Our Method
 - **Graph Attention Network**
-- scgat.py
+- run python scgat.py can get the paper results.
 
 
