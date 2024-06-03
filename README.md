@@ -98,7 +98,6 @@ Incorporates model scoring metrics like LogME, LEEP, and H-Score as indicators o
 
 ## Our Method
 - **Graph Attention Network**
-- gat_dm.py
-- **Linear Regression**
-- LR.py
+- scgat.py
+
 
