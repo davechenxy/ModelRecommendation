@@ -1,7 +1,10 @@
 # Transferability Predition for Model Recommendation
 
-## Overview
-This repository is dedicated to the study and evaluation of pretrained model (Source model) transferability across a diverse set of tasks (Target datasets). We use metadata of models and datasets, along with training history records, to predict the transferability of models on various datasets. This resource aims to facilitate research into optimizing pre-trained models for specific tasks by accurately predicting and evaluating their transferability.
+The research paper associated with this project can be found here:
+[SCG4Trf: A Novel Approach to X](SCG4Trf.pdf)
+
+## Abstract
+Transfer learning has emerged as a popular approach to improv- ing the performance of target tasks using knowledge from related source models. However, it remains challenging to select the most suitable pre-trained models, especially with multiple heterogeneous model architectures. As a solution to this scenario, in this paper, we formulate the transferability prediction problem as a bipartite graph learning problem, and propose a source data-free transferability prediction method. Leveraging task metadata as node information, a customized Graph Attention Network (GAT) is employed to predict the transferability among tasks, i.e., the graph edges. By learning low-dimensional task embeddings and predicting edges in the latent space, our method effectively captures intrinsic task relationships and infers transferability for unseen task pairs. Experimental re- sults on general image classification tasks and segmentation tasks in autonomous driving scenarios demonstrate the effectiveness of our method, showcasing improvements of 15% and 12% compared to state-of-the-art methods, respectively. 
 
 ![Prediction result sorted by missing edges](./images/result.png)
 
